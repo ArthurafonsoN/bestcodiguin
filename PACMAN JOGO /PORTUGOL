@@ -1,0 +1,107 @@
+programa {
+  funcao inicio() {
+   
+    cadeia mapa[12][12]
+    inteiro linha=0, coluna=0
+    inteiro ultimaLinha=0, ultimaColuna=0
+    caracter direcao
+    inteiro pontos = 0
+
+
+    //Preenchendo a mapa de jogo com zeros
+    para (inteiro i=0; i<10; i++){
+      para (inteiro j=0; j<10; j++){
+        mapa[i][j] = "|"
+      }
+    }
+    //Criando posicoes para os obstaculos
+    mapa[0][4] = "🍎"
+    mapa[1][2] = "🍎"
+    mapa[2][7] = "🍎"
+    mapa[3][6]=  "🍎"
+    mapa[4][2] = "🍎"
+    mapa[5][4]=  "🍎"
+    mapa[6][3]=  "🍎"
+    mapa[7][5]=  "🍎"
+    mapa[8][2]=  "🍎"
+    mapa[9][6]=  "🍎"
+   
+    //Definindo a posicao inicial da personagem
+    mapa[0][0]= "🟡◽◽◽◽"
+
+
+    //Mostrando a versão inicial do mapa
+    para (inteiro i=0; i<10; i++){
+      para (inteiro j=0; j<10; j++){
+        escreva(mapa[i][j], " ")
+      }
+      escreva("\n")
+    }    
+
+
+    //Lendo um comando para movimentar a personagem
+    enquanto(verdadeiro){
+      escreva("Mova com W , A , S , D: ")
+      leia(direcao)
+      limpa()
+
+
+      //Verificando qual tecla foi pressionada
+      escolha(direcao){
+        caso "s":
+          se (linha + 1 < 10){
+            linha++
+            pontos += 100
+          }
+          pare
+         
+        caso "a":
+          se (coluna - 1 >= 0){
+            coluna--
+            pontos += 100
+          }
+          pare
+         
+        caso "w":
+          se (linha - 1 >= 0){
+            linha--
+            pontos += 100
+          }
+          pare
+         
+        caso "d":
+          se (coluna + 1 < 10){
+            coluna++
+            pontos += 100
+          }
+          pare
+         
+        caso contrario:
+          pare
+      }
+     
+      //Verificando colisão0
+      se (mapa[linha][coluna] == "🍎"){
+        escreva("Você colidiu! Pontuação final: ", pontos)
+        pare
+      }
+     
+      //Memorizando qual foi a última posição que a personagem esteve
+      mapa[ultimaLinha][ultimaColuna]="_"
+     
+      //Definindo a nova posição da personagem no mapa
+      mapa[linha][coluna]="🟡◽◽◽◽"
+     
+      //Exibindo o mapa de jogo atualizado
+      para (inteiro i=0; i<10; i++){
+       para (inteiro j=0; j<10; j++){
+          escreva(mapa[i][j], " ")
+       }
+       escreva("\n")
+      }
+     
+      ultimaLinha=linha
+      ultimaColuna=coluna
+    }
+  }
+}
